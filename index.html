@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome - Opti-Split</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="onboarding-bg">
+  <div class="blur-overlay"></div>
+  
+  <div class="glass-card 3d-elevated onboarding-box">
+    <h1 class="text-gradient">Welcome</h1>
+    <p class="subtitle">Set up your profile to start splitting.</p>
+
+    <form id="onboarding-form">
+      <div class="input-group">
+        <label>Your Name</label>
+        <input type="text" id="username" placeholder="e.g., Sahith" required>
+      </div>
+
+      <div class="input-group">
+        <label>Choose Avatar</label>
+        <div class="avatar-selector">
+          <label class="avatar-option">
+            <input type="radio" name="avatar" value="👨" checked>
+            <span class="avatar-badge 3d-btn">👨</span>
+          </label>
+          <label class="avatar-option">
+            <input type="radio" name="avatar" value="👩">
+            <span class="avatar-badge 3d-btn">👩</span>
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary 3d-push w-100">Enter Dashboard</button>
+    </form>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script>
+    window.onload = () => {
+      if (localStorage.getItem('app_user_profile')) {
+        window.location.href = 'main.html';
+      }
+      document.getElementById('onboarding-form')?.addEventListener('submit', handleOnboarding);
+    };
+  </script>
+</body>
+</html>

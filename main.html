@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Opti-Split</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-bg">
+  
+  <!-- Top Navigation -->
+  <header class="glass-header 3d-elevated">
+    <div class="logo text-gradient">Opti-Split</div>
+    <div class="user-profile">
+      <span id="nav-avatar"></span>
+      <span id="nav-name" class="fw-bold"></span>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    
+    <!-- LEFT COLUMN: Friends List -->
+    <aside class="glass-card 3d-elevated col-left">
+      <h2>Group Members</h2>
+      <div class="add-member-group" style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <input type="text" id="new-member-name" placeholder="Friend's Name" style="flex-grow: 1;">
+        <button onclick="addMember()" class="btn-secondary 3d-push">+</button>
+      </div>
+      <div id="members-list" class="members-list">
+        <!-- Injected via JS -->
+      </div>
+    </aside>
+
+    <!-- MIDDLE COLUMN: Active Workspace -->
+    <main class="glass-card 3d-elevated col-middle">
+      
+      <!-- Clean Workspace Header -->
+      <div class="workspace-header">
+        <h2 id="active-payer-title" class="text-gradient">Add a member to start...</h2>
+        
+        <!-- Scan AI Button -->
+        <label class="btn-secondary 3d-push scan-ai-btn" id="scan-ai-label" style="opacity: 0.5; pointer-events: none; cursor: pointer;">
+          📷 Scan AI
+          <input type="file" id="receipt-upload" accept="image/*" onchange="scanReceipt(event)">
+        </label>
+      </div>
+      
+      <p id="ai-status" class="status-text hidden"></p>
+
+      <!-- Expense Form -->
+      <form id="expense-form" onsubmit="saveExpense(event)">
+        <div class="input-group">
+          <label>Description / Vendor</label>
+          <input type="text" id="exp-desc" required>
+        </div>
+        <div class="input-group">
+          <label>Category</label>
+          <select id="exp-category">
+            <option>Food</option>
+            <option>Rent</option>
+            <option>Travel</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Amount (₹)</label>
+          <input type="number" id="exp-amount" step="0.01" required>
+        </div>
+        <div class="input-group">
+          <label>Split Among</label>
+          <div id="split-checkboxes" class="checkbox-grid">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+        <button type="submit" class="btn-primary 3d-push w-100" id="submit-expense-btn" disabled>Add Expense</button>
+      </form>
+    </main>
+
+    <!-- RIGHT COLUMN: Real-Time Settlements -->
+    <section class="glass-card 3d-elevated col-right">
+      <div style="display: flex; flex-direction: column; height: 100%;">
+        <div style="flex-grow: 1;">
+          <h2 class="section-title">Live Balances</h2>
+          <div id="balances-container" class="balances-container">
+            <!-- Injected via JS -->
+          </div>
+          
+          <h2 class="section-title mt-balanced">Optimized Settlement</h2>
+          <div id="settlements-container" class="settlements-container">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+        
+        <!-- Clear Data / Settle Button -->
+        <button onclick="clearAllData()" class="btn-primary 3d-push w-100" style="background: #10b981; box-shadow: 0 6px 0 #059669; margin-top: 20px;">
+          ✅ Mark All as Settled
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script>
+    window.onload = () => {
+      if (!localStorage.getItem('app_user_profile')) {
+        window.location.href = 'index.html';
+      } else {
+        initDashboard();
+      }
+    };
+  </script>
+</body>
+</html>

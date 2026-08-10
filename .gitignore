@@ -1,0 +1,6 @@
+# Ignore local configuration files with sensitive keys
+config.js
+
+# Standard OS files
+.DS_Store
+Thumbs.db
